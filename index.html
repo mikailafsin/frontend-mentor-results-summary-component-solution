@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+        <title>Frontend Mentor | Results summary component</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body class="min-h-screen gap-6 font-hankenGrotesk font-medium lg:flex lg:flex-col lg:items-center lg:justify-center">
+        <div class="lg:flex lg:max-w-2xl lg:overflow-hidden lg:rounded-[2rem] lg:shadow-2xl">
+            <div
+                class="rounded-b-[2rem] bg-gradient-to-b from-gradients-light-slate-blue to-gradients-light-royal-blue p-5 text-center text-neutral-white lg:w-1/2 lg:rounded-tr-[2rem] lg:px-0 lg:pb-0 lg:pt-7"
+            >
+                <h1 class="mb-5 font-medium text-neutral-light-lavender lg:mb-7 lg:text-xl">Your Result</h1>
+                <div
+                    class="mb-4 inline-flex h-36 w-36 flex-col justify-center rounded-full bg-gradient-to-b from-gradients-violet-blue font-extrabold lg:mb-6 lg:h-44 lg:w-44"
+                >
+                    <p id="result" class="mb-1 text-5xl"></p>
+                    <p class="text-xs text-neutral-light-lavender">of 100</p>
+                </div>
+                <h2 class="mb-2 text-xl lg:mb-4 lg:text-2xl">Great</h2>
+                <p class="mx-auto mb-6 w-3/5 text-base text-neutral-light-lavender">
+                    You scored higher than 65% of the people who have taken these tests.
+                </p>
+            </div>
+            <div class="px-9 py-5 lg:w-1/2 lg:pb-10 lg:pt-7">
+                <h3 class="mb-5 font-bold lg:text-xl">Summary</h3>
+                <ul id="list" class="mb-6 space-y-4 lg:mb-8"></ul>
+                <a
+                    class="inline-block w-full rounded-full bg-neutral-dark-gray-blue p-3 text-center font-extrabold text-neutral-white transition-colors hover:bg-gradient-to-b hover:from-gradients-light-slate-blue hover:to-gradients-light-royal-blue"
+                    href="#"
+                    >Continue</a
+                >
+            </div>
+        </div>
+        <div class="text-center text-xs">
+            Challenge by <a class="text-attribution-link" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+            Coded by <a href="https://github.com/mikailafsin">Mikail Afşin</a>.
+        </div>
+
+        <script>
+            fetch("data.json")
+                .then((response) => response.json())
+                .then((data) => populateList(data))
+                .catch((error) => console.error("JSON yüklenirken hata oluştu: ", error));
+
+            function populateList(data) {
+                let list = document.getElementById("list");
+                let result = document.getElementById("result");
+                let score = 0;
+                data.forEach((item, index) => {
+                    let li = document.createElement("li");
+                    li.className = `flex justify-between rounded-lg bg-${getBackgroundColor(index)}/10 p-4`;
+                    li.innerHTML = `
+                        <div class="flex gap-2">
+                            <img src="${item.icon}" alt="${item.category} icon" />
+                            <span class="font-bold text-${getBackgroundColor(index)}">${item.category}</span>
+                        </div>
+                        <div class="font-extrabold text-neutral-dark-gray-blue/50"><span class="text-neutral-dark-gray-blue">${item.score}</span> / 100</div>
+                    `;
+                    list.appendChild(li);
+                    score += item.score;
+                });
+                result.innerHTML = (score / data.length).toFixed(0);
+            }
+
+            function getBackgroundColor(index) {
+                const colors = ["primary-light-red", "primary-orangey-yellow", "primary-green-teal", "primary-cobalt-blue"];
+                return colors[index];
+            }
+        </script>
+    </body>
+</html>
