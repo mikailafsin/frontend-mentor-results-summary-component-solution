@@ -643,26 +643,6 @@ video {
   background-color: hsl(224 30% 27% / var(--tw-bg-opacity));
 }
 
-.bg-primary-cobalt-blue{
-  --tw-bg-opacity: 1;
-  background-color: hsl(234 85% 45% / var(--tw-bg-opacity));
-}
-
-.bg-primary-green-teal{
-  --tw-bg-opacity: 1;
-  background-color: hsl(166 100% 37% / var(--tw-bg-opacity));
-}
-
-.bg-primary-light-red{
-  --tw-bg-opacity: 1;
-  background-color: hsl(0 100% 67% / var(--tw-bg-opacity));
-}
-
-.bg-primary-orangey-yellow{
-  --tw-bg-opacity: 1;
-  background-color: hsl(39 100% 56% / var(--tw-bg-opacity));
-}
-
 .bg-primary-cobalt-blue\/10{
   background-color: hsl(234 85% 45% / 0.1);
 }
